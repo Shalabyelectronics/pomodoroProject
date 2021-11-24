@@ -30,7 +30,7 @@ canvas = Canvas(width=500, height=500, bg=SAND_DOLLAR, highlightthickness=0)
 # coordinate.
 canvas.create_image(250, 250, image=pomodoro_img)
 # Create the text on the tomato image that refer to timing.
-canvas.create_text(250, 275, text="00:00",fill=SAND_DOLLAR ,font=(FONT, 50))
+canvas.create_text(250, 275, text="00:00",fill="white" ,font=(FONT, 50))
 canvas.grid(column=1, row=1)
 # Create the timing label up from the tometo image
 timing_label = Label(text="Timing", fg=NAVY_BLUE, bg=SAND_DOLLAR, font=(FONT, 50))
@@ -38,7 +38,12 @@ timing_label.grid(column=1, row=0)
 # Create start button
 start = Button(text="Start",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
 start.grid(column=0, row=2)
+# create rest button
+rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
+rest.grid(column=2, row=2)
+# Create check_markes label
+check_marks= Label(text="✅", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
+check_marks.grid(column=1, row=3)
 
-canvas.grid()
 
 window.mainloop()
