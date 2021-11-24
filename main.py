@@ -7,6 +7,10 @@ TEAL = "#01949A"
 NAVY_BLUE = "#004369"
 RED = "#DB1F48"
 # COLORED palate from https://www.canva.com/colors/color-palettes/
+# ----- Timing ----#
+FOCUS = 25
+REST = 5
+LONG_REST = 30
 
 # First we are going to import all classes from tkinter module.
 
