@@ -16,6 +16,9 @@ LONG_REST = 30
 #-------- Font ------#
 FONT= "Coiny"
 #---------------------- Count Down Functinality -------------------#
+def call_count_down():
+    count_down(5)
+
 def count_down(time):
     if time >= 0:
         window.after(1000,count_down, time -1)
@@ -41,7 +44,7 @@ canvas.grid(column=1, row=1)
 timing_label = Label(text="Timing", fg=NAVY_BLUE, bg=SAND_DOLLAR, font=(FONT, 50))
 timing_label.grid(column=1, row=0)
 # Create start button
-start = Button(text="Start",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
+start = Button(text="Start",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=call_count_down)
 start.grid(column=0, row=2)
 # create rest button
 rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
@@ -49,6 +52,6 @@ rest.grid(column=2, row=2)
 # Create check_markes label
 check_marks= Label(text="✅", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
 check_marks.grid(column=1, row=3)
-count_down(5)
+
 
 window.mainloop()
