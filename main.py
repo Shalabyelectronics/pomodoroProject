@@ -1,5 +1,13 @@
 from tkinter import *
 
+# ----------constants-----------#
+# --- COLORS ----#
+SAND_DOLLAR = "#E5DDC8"
+TEAL = "#01949A"
+NAVY_BLUE = "#004369"
+RED = "#DB1F48"
+# COLORED palate from https://www.canva.com/colors/color-palettes/
+
 # First we are going to import all classes from tkinter module.
 
 # --------------------- Create application GUI --------------------#
