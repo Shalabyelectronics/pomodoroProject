@@ -52,6 +52,9 @@ def count_down(time):
         seconds = f"0{seconds}"
     if minutes < 10:
         minutes = f"0{minutes}"
+    #Note that python support Dynamic typing as we can change the data type of the variable in any stage of our programe
+    # And only python support this techniqe as other programming languages can't change the data types assigned to their
+    # Variables like C and Java for example.
     canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
     if time>0:
         window.after(1000, count_down, time - 1)
