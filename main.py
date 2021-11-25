@@ -1,5 +1,6 @@
 # First we are going to import all classes from tkinter module.
 from tkinter import *
+import math
 
 # ----------constants-----------#
 # --- COLORS ----#
@@ -16,13 +17,30 @@ LONG_REST = 30
 #-------- Font ------#
 FONT= "Coiny"
 #---------------------- Count Down Functinality -------------------#
+# Note we need to run the time as minutes:seconds
+# So one minute have 60 second so each time 60 second done one minutes will added but for our count down will decremented
 def call_count_down():
-    count_down(5)
+    count_down(1*60)
 
 def count_down(time):
+    minutes = math.floor(time / 60)
+    seconds = time % 60
     if time >= 0:
-        window.after(1000,count_down, time -1)
-        canvas.itemconfig(canvas_text, text=time)
+        if minutes <10:
+            if seconds == 0 or seconds < 10:
+                canvas.itemconfig(canvas_text, text=f"0{minutes}:0{seconds}")
+            else:
+                canvas.itemconfig(canvas_text, text=f"0{minutes}:{seconds}")
+        elif minutes > 9 :
+            if seconds == 0 :
+                canvas.itemconfig(canvas_text, text=f"{minutes}:0{seconds}")
+            else:
+                canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
+        window.after(1000, count_down, time - 1)
+
+
+
+
 
 # --------------------- Create application GUI --------------------#
 window = Tk()
