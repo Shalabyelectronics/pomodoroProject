@@ -20,22 +20,32 @@ FONT= "Coiny"
 # Note we need to run the time as minutes:seconds
 # So one minute have 60 second so each time 60 second done one minutes will added but for our count down will decremented
 def call_count_down():
+    # first we an expression argument that multiplay the minutes with the total seconds in a minutes.
     count_down(1*60)
 
 def count_down(time):
+    # We used math module because of floor method as it rounded the number to the small value for example 4.8 will be 4
     minutes = math.floor(time / 60)
+    # we used modulo to get the current remaining seconds.
     seconds = time % 60
+    # we can use if or while statement here and it will check the total time if it is greater or equal to zero.
     if time >= 0:
+        # we checked the minutes if minutes are less than 10 so it will take a range of number from 9 to 0.
         if minutes <10:
-            if seconds == 0 or seconds < 10:
+            # Then it will check if the minutes are less than 10.
+            if seconds < 10:
+                # If true it will change the text canvas so we add zero as string leftof each minutes and seconds
                 canvas.itemconfig(canvas_text, text=f"0{minutes}:0{seconds}")
             else:
+                # Else if seconds are greater than 10 just change the whole seconds.
                 canvas.itemconfig(canvas_text, text=f"0{minutes}:{seconds}")
         elif minutes > 9 :
-            if seconds == 0 :
+            # Then it will check if the minutes are greater than 9 so it will take a range of number from 10 to infinte.
+            if seconds < 10 :
                 canvas.itemconfig(canvas_text, text=f"{minutes}:0{seconds}")
             else:
                 canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
+        # last line is the why we update the window each one second by calling the count_down function and decremented the time.
         window.after(1000, count_down, time - 1)
 
 
