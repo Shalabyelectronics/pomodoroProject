@@ -28,24 +28,32 @@ def count_down(time):
     minutes = math.floor(time / 60)
     # we used modulo to get the current remaining seconds.
     seconds = time % 60
+    # Refactor the code from this
     # we can use if or while statement here and it will check the total time if it is greater or equal to zero.
-    if time >= 0:
-        # we checked the minutes if minutes are less than 10 so it will take a range of number from 9 to 0.
-        if minutes <10:
-            # Then it will check if the minutes are less than 10.
-            if seconds < 10:
-                # If true it will change the text canvas so we add zero as string leftof each minutes and seconds
-                canvas.itemconfig(canvas_text, text=f"0{minutes}:0{seconds}")
-            else:
-                # Else if seconds are greater than 10 just change the whole seconds.
-                canvas.itemconfig(canvas_text, text=f"0{minutes}:{seconds}")
-        elif minutes > 9 :
-            # Then it will check if the minutes are greater than 9 so it will take a range of number from 10 to infinte.
-            if seconds < 10 :
-                canvas.itemconfig(canvas_text, text=f"{minutes}:0{seconds}")
-            else:
-                canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
+    # if time >= 0:
+    #     # we checked the minutes if minutes are less than 10 so it will take a range of number from 9 to 0.
+    #     if minutes <10:
+    #         # Then it will check if the minutes are less than 10.
+    #         if seconds < 10:
+    #             # If true it will change the text canvas so we add zero as string leftof each minutes and seconds
+    #             canvas.itemconfig(canvas_text, text=f"0{minutes}:0{seconds}")
+    #         else:
+    #             # Else if seconds are greater than 10 just change the whole seconds.
+    #             canvas.itemconfig(canvas_text, text=f"0{minutes}:{seconds}")
+    #     elif minutes > 9 :
+    #         # Then it will check if the minutes are greater than 9 so it will take a range of number from 10 to infinte.
+    #         if seconds < 10 :
+    #             canvas.itemconfig(canvas_text, text=f"{minutes}:0{seconds}")
+    #         else:
+    #             canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
         # last line is the why we update the window each one second by calling the count_down function and decremented the time.
+    # refactor it to this so I save more line of codes and it become easy to read.
+    if seconds < 10:
+        seconds = f"0{seconds}"
+    if minutes < 10:
+        minutes = f"0{minutes}"
+    canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
+    if time>0:
         window.after(1000, count_down, time - 1)
 
 
