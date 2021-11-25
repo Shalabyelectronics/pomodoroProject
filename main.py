@@ -10,9 +10,11 @@ NAVY_BLUE = "#004369"
 RED = "#DB1F48"
 # COLORED palate from https://www.canva.com/colors/color-palettes/
 # ----- Timing ----# Note: All timing will convert later to seconds.
-FOCUS = 25
+FOCUS = 10
 REST = 5
-LONG_REST = 30
+LONG_REST = 15
+cycle = 0
+marks = 1
 
 #-------- Font ------#
 FONT= "Coiny"
@@ -21,7 +23,25 @@ FONT= "Coiny"
 # So one minute have 60 second so each time 60 second done one minutes will added but for our count down will decremented
 def call_count_down():
     # first we an expression argument that multiplay the minutes with the total seconds in a minutes.
-    count_down(1*60)
+    global cycle
+    if cycle % 2 == 0 and cycle < 8:
+        focus_state.config(text="Focus")
+        count_down(FOCUS)
+        cycle +=1
+    elif cycle % 2 != 0:
+        focus_state.config(text="Short break")
+        count_down(REST)
+        cycle +=1
+    else:
+        global marks
+        check_marks.config(text="✅" * marks )
+        marks +=1
+        focus_state.config(text="Long break")
+        count_down(LONG_REST)
+        cycle = 0
+
+
+
 
 def count_down(time):
     # We used math module because of floor method as it rounded the number to the small value for example 4.8 will be 4
@@ -58,10 +78,7 @@ def count_down(time):
     canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
     if time>0:
         window.after(1000, count_down, time - 1)
-
-
-
-
+    return "Done"
 
 # --------------------- Create application GUI --------------------#
 window = Tk()
@@ -88,9 +105,11 @@ start.grid(column=0, row=2)
 # create rest button
 rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
 rest.grid(column=2, row=2)
+focus_state = Label(text=" ", fg=NAVY_BLUE, bg=SAND_DOLLAR, font=(FONT, 25))
+focus_state.grid(column=1, row=3)
 # Create check_markes label
-check_marks= Label(text="✅", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
-check_marks.grid(column=1, row=3)
+check_marks= Label(text=" ", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
+check_marks.grid(column=1, row=4)
 
 
 window.mainloop()
