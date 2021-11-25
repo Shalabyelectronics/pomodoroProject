@@ -26,7 +26,7 @@ def rest():
     cycle = 0
     marks = 1
     tomato = 1
-    focus_state.config(text="Ready!!!")
+    timing_label.config(text="Ready!")
     check_marks.config(text="")
     tomato_label.config(text="")
     canvas.itemconfig(canvas_text, text="00:00")
@@ -41,17 +41,17 @@ def call_count_down():
     global cycle, tomato, marks
     if cycle % 2 == 0 and cycle < 8:
         tomato_label.config(text="🍅"* tomato )
-        focus_state.config(text="Focus")
+        timing_label.config(text="Focus")
         count_down(FOCUS)
         tomato +=1
         cycle +=1
     elif cycle % 2 != 0 and cycle < 7:
-        focus_state.config(text="Short break")
+        timing_label.config(text="Short break")
         count_down(REST)
         cycle +=1
     else:
         check_marks.config(text="✅" * marks )
-        focus_state.config(text="Long break")
+        timing_label.config(text="Long break")
         count_down(LONG_REST)
         marks += 1
         tomato = 1
@@ -95,7 +95,8 @@ def count_down(time):
     canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
     if time>0:
         window.after(1000, count_down, time - 1)
-    return "Done"
+    else:
+        call_count_down()
 
 # --------------------- Create application GUI --------------------#
 window = Tk()
@@ -114,7 +115,7 @@ canvas.create_image(250, 250, image=pomodoro_img)
 canvas_text= canvas.create_text(250, 275, text="00:00",fill="white" ,font=(FONT, 50))
 canvas.grid(column=1, row=1)
 # Create the timing label up from the tometo image
-timing_label = Label(text="Timing", fg=NAVY_BLUE, bg=SAND_DOLLAR, font=(FONT, 50))
+timing_label = Label(text="Ready!", fg=NAVY_BLUE, bg=SAND_DOLLAR, font=(FONT, 50))
 timing_label.grid(column=1, row=0)
 # Create start button
 start = Button(text="Start",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=call_count_down)
@@ -122,14 +123,10 @@ start.grid(column=0, row=2)
 # create rest button
 rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=rest)
 rest.grid(column=2, row=2)
-focus_state = Label(text="Ready!!!", fg=NAVY_BLUE, bg=SAND_DOLLAR, font=(FONT, 25))
-focus_state.grid(column=1, row=3)
 # Create check_markes label
 check_marks= Label(text="", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
-check_marks.grid(column=1, row=4)
+check_marks.grid(column=1, row=3)
 tomato_label = Label(text="", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
-tomato_label.grid(column=1, row=5)
-
-
+tomato_label.grid(column=1, row=4)
 
 window.mainloop()
