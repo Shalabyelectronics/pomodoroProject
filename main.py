@@ -22,7 +22,7 @@ timer = None
 FONT= "Coiny"
 #---------------------- Reset Fuction ------------------------------#
 # This function will return all settings to default condition.
-def reset():
+def reset_timer():
     global cycle, marks, tomato, timer
     cycle = 0
     marks = 1
@@ -125,8 +125,8 @@ timing_label.grid(column=1, row=0)
 start = Button(text="Start",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=call_count_down)
 start.grid(column=0, row=2)
 # create rest button
-rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=reset)
-rest.grid(column=2, row=2)
+reset = Button(text="Reset",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=reset_timer)
+reset.grid(column=2, row=2)
 # Create check_markes label
 check_marks= Label(text="", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
 check_marks.grid(column=1, row=3)
