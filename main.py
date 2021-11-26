@@ -3,30 +3,32 @@ from tkinter import *
 import math
 
 # ----------constants-----------#
+# ----- Timing ----# Note: All timing will convert later to seconds.
+FOCUS = 10
+REST = 5
+LONG_REST = 15
 # --- COLORS ----#
 SAND_DOLLAR = "#E5DDC8"
 TEAL = "#01949A"
 NAVY_BLUE = "#004369"
 RED = "#DB1F48"
 # COLORED palate from https://www.canva.com/colors/color-palettes/
-# ----- Timing ----# Note: All timing will convert later to seconds.
-FOCUS = 10
-REST = 5
-LONG_REST = 15
+
 cycle = 0
 marks = 1
 tomato = 1
-
+timer = None
 #-------- Font ------#
 FONT= "Coiny"
-#---------------------- Rest Fuction ------------------------------#
+#---------------------- Reset Fuction ------------------------------#
 # This function will return all settings to default condition.
-def rest():
-    global cycle, marks, tomato
+def reset():
+    global cycle, marks, tomato, timer
     cycle = 0
     marks = 1
     tomato = 1
-    timing_label.config(text="Ready!")
+    window.after_cancel(timer)
+    timing_label.config(text="Ready!", fg=NAVY_BLUE)
     check_marks.config(text="")
     tomato_label.config(text="")
     canvas.itemconfig(canvas_text, text="00:00")
@@ -40,18 +42,19 @@ def call_count_down():
     # first we an expression argument that multiplay the minutes with the total seconds in a minutes.
     global cycle, tomato, marks
     if cycle % 2 == 0 and cycle < 8:
-        tomato_label.config(text="🍅"* tomato )
-        timing_label.config(text="Focus")
+        timing_label.config(text="Focus", fg=RED)
+        tomato_label.config(text="🍅" * tomato)
         count_down(FOCUS)
-        tomato +=1
+        tomato += 1
         cycle +=1
     elif cycle % 2 != 0 and cycle < 7:
-        timing_label.config(text="Short break")
+        timing_label.config(text="Short break", fg=TEAL)
         count_down(REST)
         cycle +=1
     else:
         check_marks.config(text="✅" * marks )
-        timing_label.config(text="Long break")
+        timing_label.config(text="Long break", fg=NAVY_BLUE)
+        tomato_label.config(text="")
         count_down(LONG_REST)
         marks += 1
         tomato = 1
@@ -94,7 +97,8 @@ def count_down(time):
     # Variables like C and Java for example.
     canvas.itemconfig(canvas_text, text=f"{minutes}:{seconds}")
     if time>0:
-        window.after(1000, count_down, time - 1)
+        global timer
+        timer = window.after(1000, count_down, time - 1)
     else:
         call_count_down()
 
@@ -121,7 +125,7 @@ timing_label.grid(column=1, row=0)
 start = Button(text="Start",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=call_count_down)
 start.grid(column=0, row=2)
 # create rest button
-rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=rest)
+rest = Button(text="Rest",fg=TEAL,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0, command=reset)
 rest.grid(column=2, row=2)
 # Create check_markes label
 check_marks= Label(text="", fg=RED,bg=SAND_DOLLAR, font=(FONT,25) ,highlightthickness=0)
