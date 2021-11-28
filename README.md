@@ -1,5 +1,5 @@
 ## Pomodoro Technique program:
-![](C:\Users\dalla\PycharmProjects\pomodoroProject\pomodoroWork.png)
+![](pomodoroWork.png)
 ### Introduction:
 
 This project is a Python tkinter practice, as we configure this program base on Pomodoro technique, and it is about 
